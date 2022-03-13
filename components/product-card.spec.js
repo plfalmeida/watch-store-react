@@ -1,4 +1,4 @@
-import { screen, render } from '@testing-library/react';
+import { screen, render, fireEvent } from '@testing-library/react';
 import ProductCard from './product-card';
 
 const product = {
@@ -8,8 +8,10 @@ const product = {
 };
 
 const renderProductCard = () => {
-  render(<ProductCard product={product} />);
+  render(<ProductCard product={product} addToCart={addToCart} />);
 };
+
+const addToCart = jest.fn();
 
 describe('ProductCard', () => {
   it('should render ProductCard', () => {
@@ -24,5 +26,15 @@ describe('ProductCard', () => {
     expect(screen.getByTestId('image')).toHaveStyle({
       backgroundImage: product.image,
     });
+  });
+
+  it('should call props.addToCart() when button gets clicked', async () => {
+    renderProductCard();
+    const button = screen.getByRole('button');
+
+    await fireEvent.click(button);
+
+    expect(addToCart).toHaveBeenCalledTimes(1);
+    expect(addToCart).toHaveBeenCalledWith(product);
   });
 });
