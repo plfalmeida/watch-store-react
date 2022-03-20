@@ -16,12 +16,14 @@
   },
   "dependencies": {
     "@tailwindcss/ui": "^0.7.2",
+    "axios": "^0.26.1",
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "tailwindcss": "^3.0.23"
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.0.0",
     "@testing-library/dom": "^8.11.3",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
@@ -29,6 +31,7 @@
     "babel-jest": "^27.5.1",
     "jest": "^27.5.1",
     "jest-dom": "^4.0.0",
+    "miragejs": "^0.1.43",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "^7.4.2"
   }
