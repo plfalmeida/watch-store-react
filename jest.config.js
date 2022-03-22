@@ -6,5 +6,5 @@ module.exports = {
     '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',
   },
   collectCoverage: false,
-  collectCoverageFrom: ['<rootDir>/components/**/*.js', '<rootDir>/pages/**/*.js'],
+  collectCoverageFrom: ['<rootDir>/components/**/*.js', '<rootDir>/pages/**/*.js', '<rootDir>/hooks/**/*.js'],
 };

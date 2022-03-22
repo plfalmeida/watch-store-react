@@ -6,6 +6,7 @@ specifiers:
   '@testing-library/dom': ^8.11.3
   '@testing-library/jest-dom': ^5.16.2
   '@testing-library/react': ^12.1.4
+  '@testing-library/react-hooks': ^7.0.2
   '@testing-library/user-event': ^13.5.0
   axios: ^0.26.1
   babel-jest: ^27.5.1
@@ -17,6 +18,7 @@ specifiers:
   postcss-preset-env: ^7.4.2
   react: 17.0.2
   react-dom: 17.0.2
+  react-test-renderer: ^17.0.2
   tailwindcss: ^3.0.23
 
 dependencies:
@@ -32,6 +34,7 @@ devDependencies:
   '@testing-library/dom': 8.11.3
   '@testing-library/jest-dom': 5.16.2
   '@testing-library/react': 12.1.4_react-dom@17.0.2+react@17.0.2
+  '@testing-library/react-hooks': 7.0.2_fc2bb8a5b006d3f25c5f84ea777e678d
   '@testing-library/user-event': 13.5.0_@testing-library+dom@8.11.3
   babel-jest: 27.5.1
   jest: 27.5.1
@@ -39,6 +42,7 @@ devDependencies:
   miragejs: 0.1.43
   postcss-flexbugs-fixes: 5.0.2
   postcss-preset-env: 7.4.2
+  react-test-renderer: 17.0.2_react@17.0.2
 
 packages:
 
@@ -976,6 +980,29 @@ packages:
       redent: 3.0.0
     dev: true
 
+  /@testing-library/react-hooks/7.0.2_fc2bb8a5b006d3f25c5f84ea777e678d:
+    resolution: {integrity: sha512-dYxpz8u9m4q1TuzfcUApqi8iFfR6R0FaMbr2hjZJy1uC8z+bO/K4v8Gs9eogGKYQop7QsrBTFkv/BCF7MzD2Cg==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+      react-test-renderer: '>=16.9.0'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-test-renderer:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.17.2
+      '@types/react': 17.0.40
+      '@types/react-dom': 17.0.13
+      '@types/react-test-renderer': 17.0.1
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-error-boundary: 3.1.4_react@17.0.2
+      react-test-renderer: 17.0.2_react@17.0.2
+    dev: true
+
   /@testing-library/react/12.1.4_react-dom@17.0.2+react@17.0.2:
     resolution: {integrity: sha512-jiPKOm7vyUw311Hn/HlNQ9P8/lHNtArAx0PisXyFixDDvfl8DbD6EUdbshK5eqauvBSvzZd19itqQ9j3nferJA==}
     engines: {node: '>=12'}
@@ -1085,6 +1112,12 @@ packages:
 
   /@types/react-dom/17.0.13:
     resolution: {integrity: sha512-wEP+B8hzvy6ORDv1QBhcQia4j6ea4SFIBttHYpXKPFZRviBvknq0FRh3VrIxeXUmsPkwuXVZrVGG7KUVONmXCQ==}
+    dependencies:
+      '@types/react': 17.0.40
+    dev: true
+
+  /@types/react-test-renderer/17.0.1:
+    resolution: {integrity: sha512-3Fi2O6Zzq/f3QR9dRnlnHso9bMl7weKCviFmfF6B4LS1Uat6Hkm15k0ZAQuDz+UBq6B3+g+NM6IT2nr5QgPzCw==}
     dependencies:
       '@types/react': 17.0.40
     dev: true
@@ -2833,7 +2866,6 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
-    dev: false
 
   /lru-cache/6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
@@ -3031,7 +3063,6 @@ packages:
   /object-assign/4.1.1:
     resolution: {integrity: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=}
     engines: {node: '>=0.10.0'}
-    dev: false
 
   /object-hash/2.2.0:
     resolution: {integrity: sha512-gScRMn0bS5fH+IuwyIFgnh9zBdo4DV+6GhygmWM9HyNJSgS0hScp1f5vjtm7oIIOiT9trXrShAkLFSc2IqKNgw==}
@@ -3536,8 +3567,40 @@ packages:
       scheduler: 0.20.2
     dev: false
 
+  /react-error-boundary/3.1.4_react@17.0.2:
+    resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}
+    engines: {node: '>=10', npm: '>=6'}
+    peerDependencies:
+      react: '>=16.13.1'
+    dependencies:
+      '@babel/runtime': 7.17.2
+      react: 17.0.2
+    dev: true
+
   /react-is/17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
+    dev: true
+
+  /react-shallow-renderer/16.14.1_react@17.0.2:
+    resolution: {integrity: sha512-rkIMcQi01/+kxiTE9D3fdS959U1g7gs+/rborw++42m1O9FAQiNI/UNRZExVUoAOprn4umcXf+pFRou8i4zuBg==}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0
+    dependencies:
+      object-assign: 4.1.1
+      react: 17.0.2
+      react-is: 17.0.2
+    dev: true
+
+  /react-test-renderer/17.0.2_react@17.0.2:
+    resolution: {integrity: sha512-yaQ9cB89c17PUb0x6UfWRs7kQCorVdHlutU1boVPEsB8IDZH6n9tHxMacc3y0JoXOJUsZb/t/Mb8FUWMKaM7iQ==}
+    peerDependencies:
+      react: 17.0.2
+    dependencies:
+      object-assign: 4.1.1
+      react: 17.0.2
+      react-is: 17.0.2
+      react-shallow-renderer: 16.14.1_react@17.0.2
+      scheduler: 0.20.2
     dev: true
 
   /react/17.0.2:
@@ -3644,7 +3707,6 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-    dev: false
 
   /semver/6.3.0:
     resolution: {integrity: sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==}
