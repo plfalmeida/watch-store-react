@@ -1,8 +1,10 @@
-import { render, screen, waitFor } from '@testing-library/react';
 import Response from 'miragejs';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import ProductList from '../pages';
 import { makeServer } from '../miragejs/server';
+
 
 const renderProductList = () => {
   render(<ProductList />);
@@ -54,6 +56,29 @@ describe('ProductList', () => {
       expect(screen.queryByTestId('no-products')).toBeNull();
       expect(screen.queryAllByTestId('product-card')).toHaveLength(0);
     })
+  });
+
+  it('should filter the product lists when a search is performed', async () => {
+    const searchTerm = 'Pretty Watch';
+    server.createList('product', 2);
+    server.create('product', { title: searchTerm });
+
+    renderProductList();
+
+    await waitFor(() => {
+      expect(screen.getAllByTestId('product-card')).toHaveLength(3);
+    })
+
+    const form = screen.getByRole('form');
+    const input = screen.getByRole('searchbox');
+
+    await userEvent.type(input, searchTerm);
+    await fireEvent.submit(form);
+
+    await waitFor(() => {
+      expect(screen.queryAllByTestId('product-card')).toHaveLength(1);
+    })
+
   });
 });
 

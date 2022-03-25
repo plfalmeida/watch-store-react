@@ -1,16 +1,32 @@
+import { useEffect } from 'react';
+import { useState } from 'react';
+
 import ProductCard from '../components/product-card';
 import Search from '../components/search';
 import { useFetchProducts } from '../hooks/use-fetch-products';
 
 export default function Home() {
   const { products, error } = useFetchProducts();
+  const [term, setTerm] = useState('');
+  const [localProducts, setLocalProducts] = useState([]);
+
+  useEffect(() => {
+    if (term === '') {
+      setLocalProducts(products);
+    } else {
+      setLocalProducts(products.filter(({ title }) => {
+        return title.toLowerCase().includes(term.toLowerCase());
+      }))
+    }
+    console.log('🚀 > Home > term', term)
+  }, [products, term]);
 
   const renderProductOrMessage = () => {
-    if (!products.length && !error) {
+    if (!localProducts.length && !error) {
       return <h4 data-testid="no-products">No products</h4>
     }
 
-    return products.map(product => (
+    return localProducts.map(product => (
       <ProductCard key={product.id} product={product} />
     ))
   }
@@ -22,7 +38,7 @@ export default function Home() {
 
   return (
     <main data-testid="product-list" className="my-8">
-      <Search />
+      <Search doSearch={setTerm} />
       <div className="container mx-auto px-6">
         <h3 className="text-gray-700 text-2xl font-medium">Wrist Watch</h3>
         <span className="mt-3 text-sm text-gray-500">200+ Products</span>
