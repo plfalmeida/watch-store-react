@@ -5,10 +5,14 @@ import { makeServer } from '../../miragejs/server';
 describe('Cart Store', () => {
     let server;
     let result;
+    let add;
+    let toggle;
 
     beforeEach(() => {
         server = makeServer({ environment: 'test' })
         result = renderHook(() => useCartStore()).result
+        add = result.current.actions.add
+        toggle = result.current.actions.toggle
     })
 
     afterEach(() => {
@@ -27,7 +31,6 @@ describe('Cart Store', () => {
 
     it('should add products to state', () => {
         const products = server.createList('product', 2)
-        const add = result.current.actions.add
 
         products.forEach(product => {
             act(() => add(product))
@@ -36,10 +39,19 @@ describe('Cart Store', () => {
         expect(result.current.state.products).toHaveLength(2)
     });
 
+    it('should not add same product twice', () => {
+        const product = server.create('product');
+
+        act(() => add(product))
+        act(() => add(product))
+
+        expect(result.current.state.products).toHaveLength(1)
+    });
+
     it('should toggle open state', async () => {
         expect(result.current.state.open).toBe(false)
         expect(result.current.state.products).toHaveLength(0)
-        const toggle = result.current.actions.toggle
+
 
         act(() => toggle())
         expect(result.current.state.open).toBe(true)
