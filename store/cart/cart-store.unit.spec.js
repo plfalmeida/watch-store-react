@@ -7,17 +7,19 @@ describe('Cart Store', () => {
     let result;
     let add;
     let toggle;
+    let reset;
 
     beforeEach(() => {
         server = makeServer({ environment: 'test' })
         result = renderHook(() => useCartStore()).result
         add = result.current.actions.add
         toggle = result.current.actions.toggle
+        reset = result.current.actions.reset
     })
 
     afterEach(() => {
         server.shutdown();
-        act(() => { result.current.actions.reset() })
+        act(() => { reset() })
     })
 
     it('should return open equals false as initial state', async () => {
