@@ -27,7 +27,7 @@ export const useCartStore = create(set => {
             },
             remove(product) {
                 setState(({ state }) => {
-                    const exists = state.products.includes(product)
+                    const exists = state.products.find(({ id }) => id === product.id)
                     if (exists) {
                         state.products = state.products.filter(({ id }) => id !== product.id)
                     }

@@ -4,7 +4,10 @@ import { useState } from 'react';
 import ProductCard from '../components/product-card';
 import Search from '../components/search';
 import { useFetchProducts } from '../hooks/use-fetch-products';
+import { makeServer } from '../miragejs/server';
 import { useCartStore } from '../store/cart';
+
+makeServer();
 
 export default function Home() {
   const { products, error } = useFetchProducts();
