@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react-hooks/dom';
 import userEvent from '@testing-library/user-event';
 
 import { setAutoFreeze } from 'immer';
@@ -54,7 +54,7 @@ describe('Cart', () => {
       userEvent.click(button)
       userEvent.click(button)
     })
-    
+
     expect(spy).toHaveBeenCalledTimes(2);
   });
 
