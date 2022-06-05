@@ -4,7 +4,7 @@ import { useCartStore } from '../store/cart';
 export default function CartItem({ product }) {
   const [quantity, setQuantity] = useState(1);
   const remove = useCartStore(state => state.actions.remove);
-  
+
   const decrease = () => setQuantity(quantity > 0 ? quantity - 1 : 0);
   const increase = () => setQuantity(quantity + 1);
 
@@ -19,12 +19,13 @@ export default function CartItem({ product }) {
         />
         <div className="mx-3">
           <h3 className="text-sm text-gray-600">{product.title}</h3>
-          <button onClick={()=>{
+          <button onClick={() => {
             remove(product)
           }}>remove</button>
           <div className="flex items-center mt-2">
             <button
-              onClick={decrease}
+              data-testid="increase"
+              onClick={increase}
               className="text-gray-500 focus:outline-none focus:text-gray-600"
             >
               <svg
@@ -43,7 +44,8 @@ export default function CartItem({ product }) {
               {quantity}
             </span>
             <button
-              onClick={increase}
+              data-testid="decrease"
+              onClick={decrease}
               className="text-gray-500 focus:outline-none focus:text-gray-600"
             >
               <svg

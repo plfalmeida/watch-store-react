@@ -34,33 +34,38 @@ describe('CartItem', () => {
 
   it('should increase quantity by 1 when clicking + button', async () => {
     renderCartItem();
-    const [_, button] = screen.getAllByRole('button');
-    await fireEvent.click(button);
+    
+    const buttonIncrease = screen.getByTestId('increase');
+
+    await fireEvent.click(buttonIncrease);
 
     expect(screen.getByTestId('quantity').textContent).toBe('2');
   });
 
   it('should decrease quantity by 1 when clicking - button', async () => {
     renderCartItem();
-    const [decreaseButton, increaseButton] = screen.getAllByRole('button');
+    
+    const buttonDecrease = screen.getByTestId('decrease');
+    const buttonIncrease = screen.getByTestId('increase');
+
     const quantity = screen.getByTestId('quantity');
 
-    await fireEvent.click(increaseButton);
+    await fireEvent.click(buttonIncrease);
     expect(quantity.textContent).toBe('2');
 
-    await fireEvent.click(decreaseButton);
+    await fireEvent.click(buttonDecrease);
     expect(quantity.textContent).toBe('1');
   });
 
   it('should not decrease quantity below 0', async () => {
     renderCartItem();
-    const [decreaseButton] = screen.getAllByRole('button');
+    const buttonDecrease = screen.getByTestId('decrease');
     const quantity = screen.getByTestId('quantity');
 
     expect(quantity.textContent).toBe('1');
 
-    await fireEvent.click(decreaseButton);
-    await fireEvent.click(decreaseButton);
+    await fireEvent.click(buttonDecrease);
+    await fireEvent.click(buttonDecrease);
 
     expect(quantity.textContent).toBe('0');
   });

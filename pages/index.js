@@ -7,7 +7,10 @@ import { useFetchProducts } from '../hooks/use-fetch-products';
 import { makeServer } from '../miragejs/server';
 import { useCartStore } from '../store/cart';
 
-makeServer();
+if (process.env.NODE_ENV === 'development') {
+  makeServer();
+}
+
 
 export default function Home() {
   const { products, error } = useFetchProducts();

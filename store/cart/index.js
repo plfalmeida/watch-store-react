@@ -20,7 +20,8 @@ export const useCartStore = create(set => {
             add(product) {
                 setState(({ state }) => {
                     state.open = true
-                    if (!state.products.includes(product)) {
+                    const doesNotExist = !state.products.find(({ id }) => id === product.id)
+                    if (doesNotExist) {
                         state.products.push(product)
                     }
                 });
