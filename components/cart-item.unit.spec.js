@@ -1,5 +1,11 @@
 import { screen, render, fireEvent } from '@testing-library/react';
 import CartItem from './cart-item';
+import userEvent from '@testing-library/user-event'
+import { renderHook } from '@testing-library/react-hooks';
+import { useCartStore } from '../store/cart';
+import {setAutoFreeze} from 'immer';
+
+setAutoFreeze(false);
 
 const product = {
   title: 'Pretty watch',
@@ -34,7 +40,7 @@ describe('CartItem', () => {
 
   it('should increase quantity by 1 when clicking + button', async () => {
     renderCartItem();
-    
+
     const buttonIncrease = screen.getByTestId('increase');
 
     await fireEvent.click(buttonIncrease);
@@ -44,7 +50,7 @@ describe('CartItem', () => {
 
   it('should decrease quantity by 1 when clicking - button', async () => {
     renderCartItem();
-    
+
     const buttonDecrease = screen.getByTestId('decrease');
     const buttonIncrease = screen.getByTestId('increase');
 
@@ -69,4 +75,18 @@ describe('CartItem', () => {
 
     expect(quantity.textContent).toBe('0');
   });
+
+  it('should call remove()', async () => {
+    const result = renderHook(() => useCartStore()).result;
+    const spy = jest.spyOn(result.current.actions, 'remove')
+
+    renderCartItem();
+
+    const button = screen.getByRole('button', { name: /remove/i });
+
+    await userEvent.click(button);
+
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy).toHaveBeenCalledWith(product);
+  })
 });

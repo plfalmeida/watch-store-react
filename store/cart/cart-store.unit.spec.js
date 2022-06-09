@@ -85,6 +85,25 @@ describe('Cart Store', () => {
         expect(result.current.state.products[0]).toEqual(product2)
     })
 
+    it('should not change products if the provided product is not in the array', () => {
+        const [product1, product2, product3] = server.createList('product', 3)
+
+        act(() => {
+            add(product1);
+            add(product2);
+        })
+
+        expect(result.current.state.products).toHaveLength(2)
+
+        act(() => {
+            remove(product3)
+        })
+
+        expect(result.current.state.products).toHaveLength(2)
+        expect(result.current.state.products[0]).toEqual(product1)
+        expect(result.current.state.products[1]).toEqual(product2)
+    })
+
     it('should clear cart', () => {
         const products = server.createList('product', 2)
 
