@@ -19,3 +19,9 @@ const config = (environment) => {
 export function makeServer({ environment = 'development' } = {}) {
   return new Server(config(environment));
 }
+
+export function makeDevServer() {
+  if (process.env.NODE_ENV === 'development') {
+    makeServer();
+  }
+}
